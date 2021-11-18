@@ -1,0 +1,11 @@
+version: '3.8'
+services:
+  mysqlserver:
+    image: mysql/mysql-server:latest
+    environment:
+      - MYSQL_ROOT_PASSWORD=rootroot
+      - MYSQL_DATABASE=jmvnd
+  jmvnd:
+    image: 1.117.242.218:10001/jmvnd:v1.0
+    ports:
+      - 10010:8080

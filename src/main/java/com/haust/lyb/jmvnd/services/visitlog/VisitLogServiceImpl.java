@@ -17,6 +17,7 @@ public class VisitLogServiceImpl implements VisitLogService {
         HashMap<String, Object> rs = new HashMap<>();
         rs.put("code","200");
         rs.put("message",visitLogDao.count());
+        rs.put("log","v1.3");
         return rs;
     }
 }
