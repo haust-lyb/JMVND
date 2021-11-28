@@ -10,18 +10,20 @@
     <br>
 
     <h2>留言历史：</h2>
-    <table>
-      <tr>
-        <td>id</td>
-        <td>时间</td>
-        <td>留言</td>
-      </tr>
-      <tr v-for="item in visitLogs" :key="item.id">
-        <td>{{ item.id }}</td>
-        <td>{{ item.datetime }}</td>
-        <td>{{ item.msg }}</td>
-      </tr>
-    </table>
+    <div style="display: flex;justify-content: center;">
+      <table style="width: 80vh;">
+        <tr>
+          <td>id</td>
+          <td>时间</td>
+          <td>留言</td>
+        </tr>
+        <tr v-for="item in visitLogs" :key="item.id">
+          <td>{{ item.id }}</td>
+          <td>{{ item.datetime }}</td>
+          <td>{{ item.msg }}</td>
+        </tr>
+      </table>
+    </div>
   </div>
 </template>
 

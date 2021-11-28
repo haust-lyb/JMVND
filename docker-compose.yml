@@ -7,7 +7,7 @@ services:
       - MYSQL_ROOT_PASSWORD=rootroot
       - MYSQL_DATABASE=jmvnd
   jmvnd-ui:
-    image: liyibo888/jmvnd-ui:v1.2
+    image: liyibo888/jmvnd-ui:v1.3
   jmvnd:
     image: liyibo888/jmvnd:v1.6
     environment:
