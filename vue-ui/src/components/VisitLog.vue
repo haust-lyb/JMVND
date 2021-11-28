@@ -1,6 +1,23 @@
 <template>
   <div class="hello">
-    <h1>当前网站的访问次数：<strong>{{ visitTimes }}</strong>次</h1>
+
+    <h1>当前网站的留言数：<strong>{{ visitTimes }}</strong>条</h1>
+    <h4>springboot + Vue + docker-compose</h4>
+    <textarea style="width: 80vw; height: 200px" v-model="message"/>
+    <button @click="submit">提交</button>
+    留言历史：
+    <table>
+      <tr>
+        <td>id</td>
+        <td>时间</td>
+        <td>留言</td>
+      </tr>
+      <tr v-for="item in visitLogs" :key="item.id">
+        <td>{{ item.id }}</td>
+        <td>{{ item.datetime }}</td>
+        <td>{{ item.msg }}</td>
+      </tr>
+    </table>
   </div>
 </template>
 
@@ -12,18 +29,41 @@ export default {
   name: 'VisitLog',
   mounted() {
     this.getVisitTimes();
+    this.getVisitLogs();
   },
   data() {
     return {
-      visitTimes:0
+      message: "hi 来都来了 说点什么吧？",
+      visitTimes: 0,
+      visitLogs: []
     }
   },
-  methods:{
-    getVisitTimes(){
+  methods: {
+    getVisitTimes() {
       console.log("调用api请求后台获取访问次数");
-      axios.get('https://localhost:18080/JMVND/getVisitTimes')
-          .then(response => console.log(response));
-      this.visitTimes=1;
+      axios.get('/JMVND/getVisitTimes')
+          .then(res => {
+            console.log(res);
+            this.visitTimes = res.data.data;
+          });
+
+    },
+    getVisitLogs() {
+      axios.get('/JMVND/getVisitLogs')
+          .then(res => {
+            console.log(res);
+            this.visitLogs = res.data.data;
+          });
+    },
+    submit() {
+      axios.post("/JMVND/addVisit", {
+        message: this.message
+      }).then(res => {
+        console.log(res);
+        this.message="hi 来都来了 说点什么吧？";
+        this.getVisitTimes();
+        this.getVisitLogs();
+      });
     }
   }
 }

@@ -6,4 +6,7 @@ public interface VisitLogService {
 
     HashMap getVisitTimes();
 
+    HashMap addVisit(String message);
+
+    HashMap getVisitLog();
 }
