@@ -4,8 +4,12 @@
     <h1>当前网站的留言数：<strong>{{ visitTimes }}</strong>条</h1>
     <h4>springboot + Vue + docker-compose</h4>
     <textarea style="width: 80vw; height: 200px" v-model="message"/>
+    <br>
     <button @click="submit">提交</button>
-    留言历史：
+
+    <br>
+
+    <h2>留言历史：</h2>
     <table>
       <tr>
         <td>id</td>
@@ -56,14 +60,41 @@ export default {
           });
     },
     submit() {
-      axios.post("/JMVND/addVisit", {
-        message: this.message
+      // axios.post("/JMVND/addVisit", {
+      //   message: this.message
+      // }).then(res => {
+      //   console.log(res);
+      //   this.message="hi 来都来了 说点什么吧？";
+      //   this.getVisitTimes();
+      //   this.getVisitLogs();
+      // });
+
+      axios({
+        method: 'post',
+        url: '/JMVND/addVisit',
+        data: {
+          message: this.message
+        },
+        transformRequest: [
+          function (data) {
+            let ret = ''
+            for (let it in data) {
+              ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+            }
+            ret = ret.substring(0, ret.lastIndexOf('&'));
+            return ret
+          }
+        ],
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
       }).then(res => {
         console.log(res);
         this.message="hi 来都来了 说点什么吧？";
         this.getVisitTimes();
         this.getVisitLogs();
       });
+
     }
   }
 }
