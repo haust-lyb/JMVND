@@ -11,7 +11,7 @@
 
     <h2>留言历史：</h2>
     <div style="display: flex;justify-content: center;">
-      <table style="width: 80vh;">
+      <table border="1" cellspacing="0" style="width: 80vh;">
         <tr>
           <td>id</td>
           <td>时间</td>
@@ -20,7 +20,7 @@
         <tr v-for="item in visitLogs" :key="item.id">
           <td>{{ item.id }}</td>
           <td>{{ item.datetime }}</td>
-          <td>{{ item.msg }}</td>
+          <td style="max-width:80vw;">{{ item.msg }}</td>
         </tr>
       </table>
     </div>
